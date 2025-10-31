@@ -1,4 +1,4 @@
-# MSIT
+# NERDCO_MSIT
 
 10/31/2025
 
@@ -16,7 +16,7 @@ This repository contains a MATLAB app which administers the Multi-Source Interfe
 This implementation was developed specifically to run on our hardware at CUAnschutz, which is detailed below. However, it was developed in a modular fashion, so the task-running portion should be transferrable to other setups.
 
 This code is designed to run the MSIT as described in the config files provided by Angelique Paulk at MGH. We have attempted to stay as close to the parameters provided as possible.
- - The stimuli blocks used to run this MSIT are located in "\MSIT\BlockFiles\" and titled _mg106_msit_block_01.csv_, _mg106_msit_block_02.csv_, etc.
+ - The stimuli blocks used to run this MSIT are located in "\NERDCO_MSIT\BlockFiles\" and titled _mg106_msit_block_01.csv_, _mg106_msit_block_02.csv_, etc.
 
 ### General Task Flow:
  - The number and identity of blocks is selectable. Blocks run sequentially, waiting for experimenter and subject keyboard input before advancing to the next block.
@@ -60,17 +60,17 @@ This code is designed to run the MSIT as described in the config files provided 
 
 # File System
 
- - The MATLAB MSIT app must be run from the outer "\MSIT\" directory
+ - The MATLAB MSIT app must be run from the outer "\NERDCO_MSIT\" directory
  - The MSIT directory must contain the following subdirectories:
-	- "\MSIT\@MSIT\" containing the app and its methods
-	- "\MSIT\BlockFiles\" containing the configuration files describing the stimuli and timing information
-	- IF using parPulse to send TTLs from task computer: "\MSIT\ParallelPortFiles\" containing libraries and mex file for parPulse
+	- "\NERDCO_MSIT\@MSIT\" containing the app and its methods
+	- "\NERDCO_MSIT\BlockFiles\" containing the configuration files describing the stimuli and timing information
+	- IF using parPulse to send TTLs from task computer: "\NERDCO_MSIT\ParallelPortFiles\" containing libraries and mex file for parPulse
 
 
 # Running the app - minimal version:
 
 1. Open MATLAB
-2. Navigate to "\MSIT\" as the working directory
+2. Navigate to "\NERDCO_MSIT\" as the working directory
 3. Type ***MSIT*** in the command window, press enter, this brings up the GUI
 4. Select the "Block Configuration Files" to use. All selected blocks will be presented in order.
 5. For the minimal version (just running the task): un-check "Enable Cameras", "Enable Microphone", "Enable TTLs"
