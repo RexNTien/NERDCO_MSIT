@@ -21,7 +21,7 @@ This code is designed to run the MSIT as described in the config files provided 
 ### General Task Flow:
  - The number and identity of blocks is selectable. Blocks run sequentially, waiting for experimenter and subject keyboard input before advancing to the next block.
  - Task instructions, stimuli and fixation crosses are all shown using Psychtoolbox's DrawFormattedText function
- - Stimuli are shown for 1.75 seconds, responses are only recorded during the time that the stimuli are on
+ - Stimuli are shown for 1.75 seconds, responses are recorded during the stimulus show and through the next ISI, up to 0.05 seconds before the next stimulus show
  - The ISI value in the _.csv_ configuration file determines the time that the fixation cross is shown before each trial.
  - If the subject is holding down keys when it is time to show a stimulus, the experiment pauses until the keys are released, then re-displays the ISI fixation cross for that trial.
  - Instructions for the experimenter and feedback about trial performance are shown in the MATLAB command window
@@ -280,16 +280,15 @@ Used to show instruction text on the Psychtoolbox display, fixation cross and st
  - Returns the estimated timestamp that the text appeared on the screen, as provided by ***Screen('flip')***
  
 ### MSIT_Run_Trial.m
-_FixationStart = MSIT_Run_Trial(app, lastFixationStart)]_
+_MSIT_Run_Trial(app)]_
 
 Called from ***MSIT_Main***, runs a single trial
- 1. If it's the first trial of a block, shows the fixation cross, otherwise assumes a fixation cross is on the screen already.
- 2. Keeps the fixation cross onscreen for the length of the ISI of the current trial (***MSIT_Wait_And_Advance_Or_Cancel***)
- 3. Checks if keys are being held down before showing stimulus. If they are, show error message, and then show the fixation cross ISI again. This part loops until no keys are left down (***MSIT_Show_Text***, ***MSIT_Wait_And_Advance_Or_Cancel***)
- 4. Displays the stimulus
- 5. Waits for subject response and logs it (***MSIT_Wait_And_Get_Response***)
- 6. Draws fixation cross for the last trial. If it's the last trial of a block, waits out an ISI (***MSIT_Show_Text***, ***MSIT_Wait_And_Advance_Or_Cancel***)
- - Returns the estimated timestamp that the most recent fixation cross appeared on the screen, as provided by ***Screen('flip')***
+ 1. If it's the first trial of a block, shows the fixation cross, check for exit key (***MSIT_Wait_And_Advance_Or_Cancel***)
+ 2. Checks if keys are being held down before showing stimulus. If they are, show error message, and then show the fixation cross ISI again. This part loops until no keys are left down (***MSIT_Show_Text***, ***MSIT_Wait_And_Advance_Or_Cancel***)
+ 3. Displays the stimulus, checks for subject response and logs it (***MSIT_Wait_And_Get_Response***)
+ 4. Draws fixation cross for the next trial, continue to check for subject response and log it (***MSIT_Wait_And_Get_Response***)
+ - If a response is given during 3 or 4, changes keyboard checking to just check for escape key (***MSIT_Wait_And_Advance_Or_Cancel***)
+ - If it's the last trial of a block, waits out the last ISI again after stimulus presentation
 
 ### MSIT_Wait_And_Get_Response.m
 _MSIT_Wait_And_Get_Response(app, StartTime, WaitTime)]_

@@ -49,6 +49,11 @@ for nn = 1:app.TaskSettings.BlockAmt
     if app.Camera_CheckBox.Value
         disp('BUT FIRST ARM THE CAMERAS!');
     end
+    % If it's the first block, show a vision check to aid in screen
+    % aligning
+    if nn == 1
+        MSIT_Show_Text(app, '313', 1);
+    end
     MSIT_Wait_And_Advance_Or_Cancel(app, 0, 0, 'advance');
     if app.ExitFlag
         break;
@@ -107,11 +112,10 @@ for nn = 1:app.TaskSettings.BlockAmt
     % Trials Block.
     app.TaskSettings.nTrials = numel(app.TrialStruct.Trials);
     app.TaskSettings.CurrentTrial = 1;
-    lastFixationStart = NaN;
     while app.TaskSettings.CurrentTrial <= app.TaskSettings.nTrials
         
         % Run a trial.
-        lastFixationStart = MSIT_Run_Trial(app, lastFixationStart);
+        MSIT_Run_Trial(app);
 
         % Stash things in FinishedTrials
         app.FinishedTrials.(blockStr).Output.Trials(app.TaskSettings.CurrentTrial) = app.TrialStruct.Trials(app.TaskSettings.CurrentTrial);

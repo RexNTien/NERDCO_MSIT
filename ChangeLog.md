@@ -1,3 +1,13 @@
+MSIT changes 11/14/2025
+ - Changed the way that trials are presented. Now MSIT_Run_Trial behaves as follows:
+	- If it's the first trial, show the first ISI, waiting for escape key
+	- Check if any key is down, if it is, run current trial ISI again, otherwise advance
+	- Show current trial stimulus, check for subject response
+	- Show next trial's ISI, continue to check for subject response for current trial (allows late responses)
+	- If it's the last trial, show the last trial ISI again at the end, while checking for late responses
+ - Changed function definition of MSIT_Run_Trial as it no longer needs FixationStart as input or output
+ - Added a "vision check" before the first block begins to aid in screen positioning
+
 MSIT changes 10/31/2025
  - Further testing and bugfixes
  - Further documentation
