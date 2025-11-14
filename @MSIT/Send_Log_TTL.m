@@ -27,13 +27,12 @@ TimeFromStart = TTLTime - app.TTLlog.StartTime;
 
 % Advance the table row number
 app.TTLlog.NextrowNum = app.TTLlog.NextrowNum + 1;
-
 % Log this TTL in the app data
 app.TTLlog.TTLtable(app.TTLlog.NextrowNum,:) = ...
-    {EventTxt, TTLTime, TimeStamp, TimeFromStart, app.TaskSettings.currentBlock, app.TaskSettings.currentTrial, app.TaskSettings.TTLused, GoodAlign, TTLSent};
+    {EventTxt, TTLTime, TimeStamp, TimeFromStart, app.TaskSettings.CurrentBlock, app.TaskSettings.CurrentTrial, app.TaskSettings.TTLused, GoodAlign, TTLSent};
 
 % Log this TTL in the live TTL log
-fprintf(app.FileSettings.TTL_live_log_ID, '%s %f %f %i %i %i %i %i\n', EventTxt, TTLTime, TimeFromStart, app.TaskSettings.currentBlock, app.TaskSettings.currentTrial, app.TaskSettings.TTLused, GoodAlign, TTLSent);
+fprintf(app.FileSettings.TTL_live_log_ID, '%s %f %f %i %i %i %i %i\n', EventTxt, TTLTime, TimeFromStart, app.TaskSettings.CurrentBlock, app.TaskSettings.CurrentTrial, app.TaskSettings.TTLused, GoodAlign, TTLSent);
 
 if WaitAfter
     WaitSecs(0.0025);

@@ -32,8 +32,8 @@ switch Process
         app.TaskSettings.TTLused = false;
         app.TaskSettings.BlockAmt = 0;
         app.TaskSettings.BlocksToDo = [];
-        app.TaskSettings.currentBlock = 0;
-        app.TaskSettings.currentTrial = 0;
+        app.TaskSettings.CurrentBlock = 0;
+        app.TaskSettings.CurrentTrial = 0;
         
         % Set up default files
         defaultSaveLoc = fullfile('C:\Users\', getenv('USERNAME'), 'Documents', 'PatientData');
